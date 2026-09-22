@@ -1,0 +1,311 @@
+.categories-section {
+  width: 100%;
+  padding: 90px 24px;
+  background: #ffffff;
+}
+
+.categories-container {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+/* Heading */
+
+.categories-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 38px;
+}
+
+.categories-eyebrow {
+  display: block;
+  margin-bottom: 8px;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+
+  color: #ff6b00;
+}
+
+.categories-heading h2 {
+  margin: 0;
+
+  font-size: clamp(30px, 4vw, 43px);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+
+  color: #171717;
+}
+
+.categories-heading h2 span {
+  color: #ff6b00;
+}
+
+.categories-heading p {
+  max-width: 600px;
+  margin: 12px 0 0;
+
+  font-size: 15px;
+  line-height: 1.7;
+
+  color: #777777;
+}
+
+/* View All */
+
+.categories-view-all {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 11px 17px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #333333;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.categories-view-all:hover {
+  color: #ff6b00;
+  border-color: #ffc49e;
+}
+
+/* Grid */
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* Card */
+
+.category-card {
+  position: relative;
+
+  min-height: 180px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  padding: 22px;
+
+  border: 1px solid #eeeeee;
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.category-card::before {
+  content: "";
+
+  position: absolute;
+  top: -60px;
+  right: -60px;
+
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  background: #fff4eb;
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+}
+
+.category-card:hover {
+  border-color: #ffd2b5;
+
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, 0.07);
+}
+
+.category-card:hover::before {
+  opacity: 1;
+}
+
+/* Icon */
+
+.category-icon {
+  position: relative;
+  z-index: 1;
+
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #f7f7f7;
+
+  color: #444444;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+  background: #ff6b00;
+  color: #ffffff;
+  transform: rotate(-4deg);
+}
+
+/* Info */
+
+.category-info {
+  position: relative;
+  z-index: 1;
+
+  margin-top: 20px;
+}
+
+.category-info h3 {
+  margin: 0;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  color: #222222;
+}
+
+.category-info p {
+  margin: 6px 0 0;
+
+  font-size: 12px;
+  line-height: 1.5;
+
+  color: #999999;
+}
+
+/* Arrow */
+
+.category-arrow {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f7f7f7;
+
+  color: #888888;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.category-card:hover .category-arrow {
+  background: #fff0e6;
+  color: #ff6b00;
+  transform: translate(2px, -2px);
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .categories-section {
+    padding: 75px 20px;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .categories-section {
+    padding: 60px 16px;
+  }
+
+  .categories-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .categories-heading h2 {
+    font-size: 31px;
+  }
+
+  .categories-heading p {
+    font-size: 14px;
+  }
+
+  .categories-view-all {
+    align-self: flex-start;
+  }
+
+  .categories-grid {
+    gap: 12px;
+  }
+
+  .category-card {
+    min-height: 165px;
+    padding: 18px;
+    border-radius: 15px;
+  }
+
+  .category-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .category-info {
+    margin-top: 16px;
+  }
+
+  .category-info h3 {
+    font-size: 14px;
+  }
+
+  .category-info p {
+    font-size: 11px;
+  }
+}
