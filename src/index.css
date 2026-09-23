@@ -665,3 +665,6 @@ a {
     padding: 9px 13px;
   }
 }
+/* Accessibility and shared polish */
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(99,102,241,.25);outline-offset:2px}
+::selection{background:#c7d2fe;color:#1e1b4b}

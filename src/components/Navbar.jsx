@@ -1,92 +1,59 @@
 import { motion } from "framer-motion";
-import { Search, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Menu, Search, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => setMenuOpen(false), [location.pathname, location.search]);
+
+  const isProducts = location.pathname.startsWith("/products") || location.pathname.startsWith("/product/");
 
   return (
     <motion.header
       className="navbar"
-      initial={{ y: -80, opacity: 0 }}
+      initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.45 }}
     >
       <div className="navbar-inner">
-
-        {/* Logo */}
-        <a href="/" className="logo">
+        <Link to="/" className="logo" aria-label="PriceFinder home">
           <span className="logo-icon">P</span>
-          <span>
-            Price<span className="logo-orange">Finder</span>
-          </span>
-        </a>
+          <span>Price<span className="logo-orange">Finder</span></span>
+        </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="desktop-nav">
-          <a href="/">Home</a>
-          <a href="#categories">Categories</a>
-          <a href="#deals">Deals</a>
-          <a href="#about">About</a>
+        <nav className="desktop-nav" aria-label="Primary navigation">
+          <Link className={location.pathname === "/" ? "active" : ""} to="/">Home</Link>
+          <Link className={isProducts ? "active" : ""} to="/products">Products</Link>
+          <Link to="/#categories">Categories</Link>
+          <Link to="/#deals">Deals</Link>
+          <Link to="/#about">About</Link>
         </nav>
 
-        {/* Right Side */}
         <div className="nav-actions">
-
-          <motion.button
-            className="search-icon-btn"
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
-          >
-            <Search size={20} />
-          </motion.button>
-
-          <motion.a
-            href="#search"
-            className="nav-search-btn"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-          >
-            Search Products
-          </motion.a>
-
-          {/* Mobile Menu */}
-          <button
-            className="mobile-menu-btn"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          <Link className="search-icon-btn" to="/products" aria-label="Search products">
+            <Search size={19} />
+          </Link>
+          <Link className="nav-search-btn" to="/products">Search Products</Link>
+          <button className="mobile-menu-btn" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle menu" aria-expanded={menuOpen}>
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
-
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      <motion.div
+      <motion.nav
         className="mobile-menu"
         initial={false}
-        animate={{
-          height: menuOpen ? "auto" : 0,
-          opacity: menuOpen ? 1 : 0,
-        }}
-        style={{ overflow: "hidden" }}
+        animate={{ height: menuOpen ? "auto" : 0, opacity: menuOpen ? 1 : 0 }}
       >
-        <a href="/" onClick={() => setMenuOpen(false)}>
-          Home
-        </a>
-
-        <a href="#categories" onClick={() => setMenuOpen(false)}>
-          Categories
-        </a>
-
-        <a href="#deals" onClick={() => setMenuOpen(false)}>
-          Deals
-        </a>
-
-        <a href="#about" onClick={() => setMenuOpen(false)}>
-          About
-        </a>
-      </motion.div>
+        <Link to="/">Home</Link>
+        <Link to="/products">Products</Link>
+        <Link to="/#categories">Categories</Link>
+        <Link to="/#deals">Deals</Link>
+        <Link to="/#about">About</Link>
+      </motion.nav>
     </motion.header>
   );
 }

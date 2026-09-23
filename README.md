@@ -1,17 +1,48 @@
-# React + Vite
+# PriceFinder
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A polished React + Vite price-comparison frontend. The current build uses demo product data and is structured to connect to a real API, database and affiliate network later.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+## Production build
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run build
+```
 
-## Expanding the Oxlint configuration
+## Frontend currently includes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
-# price-finder
+- Responsive landing page
+- Product search
+- Category filters
+- Budget slider and presets
+- Sorting by price/rating
+- Product cards with discounts, ratings and savings
+- Product detail pages
+- Multi-store offer comparison UI
+- Price-alert UI with browser localStorage
+- Mobile navigation
+- Empty states and responsive layouts
+- Animation and interaction polish
+- API-ready service layer in `src/services/productService.js`
+- Environment configuration in `.env.example`
+
+## Next backend connection
+
+The UI is intentionally independent from the backend. When ready, connect:
+
+1. Product/catalog API
+2. Store/affiliate product URLs
+3. Live price refresh jobs
+4. PostgreSQL/MySQL/MongoDB database
+5. User accounts and saved alerts
+6. Email/WhatsApp/push notifications
+7. Price history and charts
+8. Admin dashboard for products, stores and affiliate links
+
+The demo UI should not be treated as live marketplace pricing until real data providers are connected.
