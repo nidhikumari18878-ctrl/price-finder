@@ -1,48 +1,54 @@
-# PriceFinder
+# PriceFinder — Full Stack Starter
 
-A polished React + Vite price-comparison frontend. The current build uses demo product data and is structured to connect to a real API, database and affiliate network later.
-
-## Run locally
-
+## 1. Frontend
+From the project root:
 ```bash
 npm install
 npm run dev
 ```
 
-## Production build
-
+## 2. Backend
+Open another terminal:
 ```bash
-npm run build
+cd backend
+npm install
 ```
 
-## Frontend currently includes
+Copy:
+```text
+backend/.env.example -> backend/.env
+```
 
-- Responsive landing page
-- Product search
-- Category filters
-- Budget slider and presets
-- Sorting by price/rating
-- Product cards with discounts, ratings and savings
-- Product detail pages
-- Multi-store offer comparison UI
-- Price-alert UI with browser localStorage
-- Mobile navigation
-- Empty states and responsive layouts
-- Animation and interaction polish
-- API-ready service layer in `src/services/productService.js`
-- Environment configuration in `.env.example`
+Make sure MongoDB Server is running, then:
+```bash
+npm run seed
+npm run dev
+```
 
-## Next backend connection
+Backend:
+- http://localhost:5000
+- http://localhost:5000/api/health
+- http://localhost:5000/api/products
 
-The UI is intentionally independent from the backend. When ready, connect:
+## Current architecture
+React/Vite → Express API → MongoDB
 
-1. Product/catalog API
-2. Store/affiliate product URLs
-3. Live price refresh jobs
-4. PostgreSQL/MySQL/MongoDB database
-5. User accounts and saved alerts
-6. Email/WhatsApp/push notifications
-7. Price history and charts
-8. Admin dashboard for products, stores and affiliate links
+Included:
+- Product API
+- Product detail API
+- MongoDB seed data
+- Price history model/API
+- Price alert model/API
+- Affiliate URL fields
+- CORS and environment configuration
+- Existing professional responsive UI
 
-The demo UI should not be treated as live marketplace pricing until real data providers are connected.
+## Still to connect later
+- Real Amazon/Flipkart affiliate product URLs
+- Real shopping/affiliate APIs
+- Automated price scraping/provider jobs
+- Email/WhatsApp alert delivery
+- Authentication/user accounts
+- Production deployment and secrets
+
+Never commit `.env` files or real API keys.

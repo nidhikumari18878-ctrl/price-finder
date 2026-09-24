@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search, ArrowRight, TrendingDown, ShieldCheck, Zap, ShoppingBag, Bell, BarChart3, CheckCircle2 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import products from "../data/products";
+import { getProducts } from "../services/productService";
 import "./Home.css";
 
-const categories = [
-  { name: "Audio", icon: "🎧", count: products.filter((p) => p.category === "Audio").length },
-  { name: "Watches", icon: "⌚", count: products.filter((p) => p.category === "Watches").length },
-  { name: "Gaming", icon: "🎮", count: products.filter((p) => p.category === "Gaming").length },
+const categoryMeta = [
+  { name: "Audio", icon: "🎧" },
+  { name: "Watches", icon: "⌚" },
+  { name: "Gaming", icon: "🎮" },
 ];
 
 const features = [
@@ -21,6 +21,19 @@ const features = [
 
 export default function Home() {
   const [search, setSearch] = useState("");
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts().then(setProducts).catch(() => setProducts([]));
+  }, []);
+
+  const categories = useMemo(
+    () => categoryMeta.map((item) => ({
+      ...item,
+      count: products.filter((p) => p.category === item.name).length,
+    })),
+    [products]
+  );
   const submitSearch = () => { if (search.trim()) window.location.href = `/products?search=${encodeURIComponent(search.trim())}`; else window.location.href = "/products"; };
 
   return (

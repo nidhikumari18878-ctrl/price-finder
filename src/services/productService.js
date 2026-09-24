@@ -1,34 +1,40 @@
-import products from "../data/products";
 import { appConfig } from "../config/app";
 
-// The UI currently uses demo data. Replace these functions with fetch/axios
-// calls when the API is ready; component interfaces can stay unchanged.
-export async function getProducts(params = {}) {
-  const query = new URLSearchParams(params).toString();
-
-  const response = await fetch(
-    `http://localhost:5000/api/products${query ? `?${query}` : ""}`
-  );
-
+async function apiRequest(path, options = {}) {
+  const response = await fetch(`${appConfig.apiBaseUrl}${path}`, options);
   if (!response.ok) {
-    throw new Error("Unable to load products");
+    throw new Error("API request failed");
   }
+  return response.json();
+}
 
-  const data = await response.json();
-
+export async function getProducts(params = {}) {
+  const query = new URLSearchParams(
+    Object.entries(params).filter(([, value]) => value !== "" && value != null)
+  ).toString();
+  const data = await apiRequest(`/products${query ? `?${query}` : ""}`);
   return data.products;
 }
 
 export async function getProductById(id) {
-  const response = await fetch(
-    `http://localhost:5000/api/products/${id}`
-  );
-
-  if (!response.ok) {
+  try {
+    const data = await apiRequest(`/products/${id}`);
+    return data.product;
+  } catch {
     return null;
   }
+}
 
-  const data = await response.json();
+export async function createPriceAlert(payload) {
+  const data = await apiRequest("/alerts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  return data.alert;
+}
 
-  return data.product;
+export async function getPriceHistory(id) {
+  const data = await apiRequest(`/products/${id}/history`);
+  return data.history;
 }
